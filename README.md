@@ -5,6 +5,12 @@ An API for accessing data contained in the [Priority Route Link Details](https:/
 ## Installation
 
 ```sh
+# how to setup a virtual environment
+python -m venv env
+env\Scripts\activate
+```
+
+```sh
 git clone https://github.com/ChristopherAyling/RouteLinkAPI.git
 cd RouteLinkAPI
 pip install -r requirements.txt
