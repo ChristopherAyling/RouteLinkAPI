@@ -1,6 +1,12 @@
+"""
+Main application file. See readme for instructions on how to run
+"""
+
 from flask import Flask, jsonify, request
 import sqlite3
 import pandas as pd
+
+# == configuration
 
 app = Flask(__name__)
 
@@ -12,30 +18,33 @@ class config():
 def isAlive():
     return "hello world"
 
+# == routes == #
+
 @app.route('/routes/<int:rid>')
 def routes(rid):
-    conn = sqlite3.connect("example.db")
+    conn = sqlite3.connect("dataset.db")
     q = "SELECT * FROM data WHERE `index` = ?"
     r = pd.read_sql(q, conn, params=[rid])
+    conn.close()
     return jsonify(r.to_dict(orient='records')[0])
 
 @app.route('/routes')
 def flight_list():
-    conn = sqlite3.connect("example.db")
+    conn = sqlite3.connect("dataset.db")
     q = "SELECT `index` FROM data"
     r = pd.read_sql(q, conn)
     ids = [str(row[0]) for row in r.values]
-    # import pdb; pdb.set_trace()
+    conn.close()
     return str(list(map(int, ids)))
 
 @app.route('/search')
 def search():
     query = request.args.get('query')
     print(query)
-    conn = sqlite3.connect("example.db")
+    conn = sqlite3.connect("dataset.db")
     q = r"SELECT * FROM data WHERE UPPER(ORIGIN_DESC) LIKE '%' || UPPER(?) || '%' OR UPPER(DEST_DESC) LIKE '%' || UPPER(?) || '%'"
     r = pd.read_sql(q, conn, params=[query, query])
-    # import pdb; pdb.set_trace()
+    conn.close()
     return jsonify(r.to_dict(orient='records'))
 
 # == execution logic == #
