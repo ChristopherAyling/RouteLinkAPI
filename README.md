@@ -23,3 +23,15 @@ python app.py
 ```sh
 python app.py --prod
 ```
+
+## Usage
+
+All returns are `JSON` formatted.
+
+```
+GET /routes
+
+GET /routes/<int>
+
+GET /search?query=<string>
+```

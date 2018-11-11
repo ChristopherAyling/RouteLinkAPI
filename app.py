@@ -12,14 +12,14 @@ class config():
 def isAlive():
     return "hello world"
 
-@app.route('/flights/<int:fid>')
-def flights(fid):
+@app.route('/routes/<int:rid>')
+def routes(rid):
     conn = sqlite3.connect("example.db")
     q = "SELECT * FROM data WHERE `index` = ?"
-    r = pd.read_sql(q, conn, params=[fid])
+    r = pd.read_sql(q, conn, params=[rid])
     return jsonify(r.to_dict(orient='records')[0])
 
-@app.route('/flights')
+@app.route('/routes')
 def flight_list():
     conn = sqlite3.connect("example.db")
     q = "SELECT `index` FROM data"
