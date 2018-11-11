@@ -2,6 +2,8 @@
 
 An API for accessing data contained in the [Priority Route Link Details](https://data.qld.gov.au/dataset/travel-times-for-key-priority-routes/resource/41091c5c-f952-46df-949a-a329a2531f41) dataset.
 
+Built as an example of `REST`, `SQL`, `PANDAS` and `FLASK` usage.
+
 ## Installation
 
 ```sh
